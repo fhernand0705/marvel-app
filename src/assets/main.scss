@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'astronova', sans-serif;
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,5 +11,10 @@ code {
 }
 
 h1 {
+  font-family: 'get schwifty', sans-serif;
   color: red;
+}
+
+main {
+  margin: 0 .5em
 }

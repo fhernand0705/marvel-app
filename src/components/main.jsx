@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, NavLink, Switch, Route } from 'react-router-dom';
 import { getCharacters } from '../services/api-service';
+import Characters from './characters';
+import Locations from './locations';
 
 function Main() {
   const [state, setState] = useState({
-    characters: []
+    characters: [],
+    locations: []
   });
 
   useEffect(() => {
@@ -17,7 +21,7 @@ function Main() {
       let i = 0;
 
       while (i < 6) {
-        const randomId = Math.floor(Math.random() * 90)
+        const randomId = Math.floor(Math.random() * 90 + 1)
         arrOfPromises.push(getCharacters(randomId));
         i++;
       }
@@ -34,15 +38,23 @@ function Main() {
   }
 
   return (
-    <div>
-      { state.characters.map(char =>
-          <div key={Math.random() + char.id}>
-            <div>{char.name}</div>
-            <div>{char.species}</div>
-            <img src={char.image} alt=""/>
-          </div>
-      )}
-    </div>
+    <main>
+      <h1>RICK AND MORTY</h1>
+      <Router>
+        <nav>
+          <ul>
+            <li><NavLink to='/characters'>Characters</NavLink></li>
+            <li><NavLink to='/locations'>Locations</NavLink></li>
+          </ul>
+        </nav>
+
+        <Route path="/characters"
+          render={props =>
+            <Characters {...props} characters={state.characters}/>}
+          />
+        <Route path="/locations" component={Locations}/>
+      </Router>
+    </main>
   )
 }
 
