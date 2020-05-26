@@ -9,6 +9,10 @@ export function getCharacters(id) {
   return axios.get(rickMortyApi + 'character/' + id);
 }
 
+export function getCharacterCount() {
+  return axios.get(rickMortyApi + 'character/');
+}
+
 export function getLocations(id) {
   return axios.get(rickMortyApi + 'location/' + id)
 }
