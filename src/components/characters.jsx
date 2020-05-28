@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getCharacters, getCharacterCount } from '../services/api-service';
 import CharacterDetails from './character-details';
 import Search from './common/search';
+import CheckboxWrapper from './common/checkbox-wrapper';
 
 function Characters() {
   const [characters, setCharacters] = useState({
@@ -11,7 +12,7 @@ function Characters() {
   const [filteredCharacters, setFilteredCharacters] = useState([]);
   const [idList, setIdList] = useState(21);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterQuery, setFilterQuery] = useState("alien")
+  const [checkedItems, setCheckItems] = useState(new Map());
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState('');
 
@@ -58,8 +59,9 @@ function Characters() {
     setSearchQuery(target.value);
     filterCharacters();
   }
+
   function filterCharacters() {
-    let filtered = characters.chars;
+    let filtered = [...characters.chars];
     if (searchQuery) {
       filtered = filtered.filter(char => {
         return char.name.toLowerCase().includes(searchQuery.toLowerCase().trim());
@@ -69,17 +71,18 @@ function Characters() {
       setFilteredCharacters(filtered);
     }
   }
-  function handleFilter({target}) {
-    console.log(target.checked, target.value, target.name)
-    setFilterQuery(target.value)
 
-    let filtered = characters.chars;
-    filtered = filtered.filter(char => {
-      return char.species.toLowerCase() === target.value;
-      console.log(char.species)
-    })
-    console.log(filtered)
-    setFilteredCharacters(filtered);
+  function handleFilter({target}) {
+    const name = target.name;
+    let isChecked = target.checked;
+    let filtered = [...characters.chars];
+
+    if (isChecked) {
+      filtered = filtered.filter(char => char.species.toLowerCase() === name);
+      setFilteredCharacters(filtered);
+    }
+    console.log(isChecked)
+    setCheckItems(checkedItems => checkedItems.set(name, isChecked));
   }
 
   return (
@@ -88,27 +91,9 @@ function Characters() {
       {filterCharacters && <h4>Characters Found: {filteredCharacters.length}</h4>}
       {error && <h4>{error}</h4>}
 
-      <Search searchQuery={searchQuery} onChange={handleSearch}/>
+      <Search searchQuery={searchQuery} onChange={handleSearch} />
 
-      <div>
-        <h4>Filter By:</h4>
-        <label htmlFor="alien">Alien</label>
-        <input
-          type="checkbox"
-          name="alien"
-          checked={false}
-          value={filterQuery}
-          onChange={(e) => handleFilter(e)}
-        />
-      <label htmlFor="human">Human</label>
-        <input
-          type="checkbox"
-          name="human"
-          checked={false}
-          value={filterQuery}
-          onChange={(e) => handleFilter(e)}
-        />
-      </div>
+      <CheckboxWrapper checkedItems={checkedItems} onChange={handleFilter} />
 
       <CharacterDetails
         characters={characters}

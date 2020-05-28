@@ -1,7 +1,7 @@
 import React from 'react';
 
 function CharacterDetails({characters, onChange, filtered}) {
-  const charsLength = characters.chars.length;
+  const charsLength = filtered.length;
   return (
     <div>
       { filtered.map((char,i) =>
