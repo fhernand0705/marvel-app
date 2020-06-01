@@ -57,10 +57,9 @@ function Characters() {
   }
   function handleSearch({target}) {
     setSearchQuery(target.value);
-    filterCharacters();
+    filterByName();
   }
-
-  function filterCharacters() {
+  function filterByName() {
     let filtered = [...characters.chars];
     if (searchQuery) {
       filtered = filtered.filter(char => {
@@ -71,24 +70,23 @@ function Characters() {
       setFilteredCharacters(filtered);
     }
   }
-
   function handleFilter({target}) {
-    const name = target.name;
+    const checkboxName = target.name;
     let isChecked = target.checked;
     let filtered = [...characters.chars];
 
     if (isChecked) {
-      filtered = filtered.filter(char => char.species.toLowerCase() === name);
+      filtered = filtered.filter(char => char.species.toLowerCase() === checkboxName);
       setFilteredCharacters(filtered);
     }
-    console.log(isChecked)
-    setCheckItems(checkedItems => checkedItems.set(name, isChecked));
+    console.log({isChecked, checkboxName})
+    setCheckItems(checkedItems => checkedItems.set(checkboxName, isChecked));
   }
 
   return (
     <div>
       {characters.charsCount && <h2>Characters: {characters.charsCount}</h2>}
-      {filterCharacters && <h4>Characters Found: {filteredCharacters.length}</h4>}
+      {filteredCharacters && <h4>Characters Found: {filteredCharacters.length}</h4>}
       {error && <h4>{error}</h4>}
 
       <Search searchQuery={searchQuery} onChange={handleSearch} />

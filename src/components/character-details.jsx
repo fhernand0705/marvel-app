@@ -14,6 +14,7 @@ function CharacterDetails({characters, onChange, filtered}) {
       {charsLength > 0 && charsLength < characters.charsCount ?
         <button onClick={() => onChange()}>Load more</button> : null
       }
+      {!charsLength && <div>Characters not found</div>}
     </div>
   )
 }
