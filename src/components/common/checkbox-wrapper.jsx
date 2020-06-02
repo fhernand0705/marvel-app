@@ -1,6 +1,6 @@
 import React from 'react';
 import Checkbox from './checkbox';
-import checkboxes from '../utils/checkboxes';
+import checkboxes from '../../utils/checkboxes';
 
 function CheckboxWrapper({onChange, checkedItems}) {
 

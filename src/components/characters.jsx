@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { getCharacters, getCharacterCount } from '../services/api-service';
 import CharacterDetails from './character-details';
 import Search from './common/search';
 import CheckboxWrapper from './common/checkbox-wrapper';
+import { getCharacters, getCharacterCount } from '../services/api-service';
+import { filterByName, filterBySpecies } from '../utils/filter-methods';
 
 function Characters() {
   const [characters, setCharacters] = useState({
@@ -57,30 +58,18 @@ function Characters() {
   }
   function handleSearch({target}) {
     setSearchQuery(target.value);
-    filterByName();
-  }
-  function filterByName() {
-    let filtered = [...characters.chars];
-    if (searchQuery) {
-      filtered = filtered.filter(char => {
-        return char.name.toLowerCase().includes(searchQuery.toLowerCase().trim());
-      })
-      setFilteredCharacters(filtered);
-    } else {
-      setFilteredCharacters(filtered);
-    }
+    const chars = [...characters.chars];
+
+    return searchQuery ? setFilteredCharacters(filterByName(searchQuery, chars)) : setFilteredCharacters(chars);
   }
   function handleFilter({target}) {
     const checkboxName = target.name;
-    let isChecked = target.checked;
-    let filtered = [...characters.chars];
+    const isChecked = target.checked;
+    const chars = [...characters.chars];
 
-    if (isChecked) {
-      filtered = filtered.filter(char => char.species.toLowerCase() === checkboxName);
-      setFilteredCharacters(filtered);
-    }
-    console.log({isChecked, checkboxName})
     setCheckItems(checkedItems => checkedItems.set(checkboxName, isChecked));
+
+    return isChecked ? setFilteredCharacters(filterBySpecies(checkboxName, chars)) : setFilteredCharacters(chars);
   }
 
   return (
