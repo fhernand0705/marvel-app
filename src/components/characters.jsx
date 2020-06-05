@@ -15,6 +15,7 @@ function Characters() {
   const [searchQuery, setSearchQuery] = useState('');
   const [checkedItems, setCheckItems] = useState(new Map());
   const [isFetching, setIsFetching] = useState(false);
+  const [isAscending, setIsAscending] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -71,13 +72,25 @@ function Characters() {
 
     return isChecked ? setFilteredCharacters(filterBySpecies(checkboxName, chars)) : setFilteredCharacters(chars);
   }
+  function handleSort() {
+    setIsAscending((prevState) => prevState = !prevState);
+
+    const sortedChars = filteredCharacters.sort((a,b) => {
+      const aZ = a.name[0].toLowerCase(), zA = b.name[0].toLowerCase();
+
+      return !isAscending ? aZ.localeCompare(zA)
+      : zA.localeCompare(aZ);
+    })
+
+    setFilteredCharacters(sortedChars);
+  }
 
   return (
     <div>
       {characters.charsCount && <h2>Characters: {characters.charsCount}</h2>}
       {filteredCharacters && <h4>Characters Found: {filteredCharacters.length}</h4>}
       {error && <h4>{error}</h4>}
-
+      <input type="checkbox" name="sort" onChange={handleSort}/>
       <Search searchQuery={searchQuery} onChange={handleSearch} />
 
       <CheckboxWrapper checkedItems={checkedItems} onChange={handleFilter} />
