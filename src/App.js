@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Profile from './components/profile';
 import Characters from './components/characters';
 import Locations from './components/locations';
 import Navbar from './components/navbar';
@@ -9,8 +10,9 @@ function App() {
     <React.Fragment>
       <Navbar />
       <Switch>
-        <Route path='/characters' component={Characters}/>
-        <Route path='/locations' component={Locations} />
+        <Route path='/characters' render={() => <Characters />} />
+        <Route path='/character/:id' render={() => <Profile />} />
+        <Route path='/locations' render={() => <Locations />} />
       </Switch>
     </React.Fragment>
   );

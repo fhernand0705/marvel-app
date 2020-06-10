@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 function CharacterDetails({characters, onChange, filtered}) {
   const charsLength = filtered.length;
@@ -6,7 +7,7 @@ function CharacterDetails({characters, onChange, filtered}) {
     <div>
       { filtered.map((char,i) =>
           <div key={i}>
-            <div>{char.name}</div>
+            <NavLink to={`/character/${char.id}`}>{char.name}</NavLink> 
             <div>{char.species}</div>
             <img src={char.image} alt=""/>
           </div>

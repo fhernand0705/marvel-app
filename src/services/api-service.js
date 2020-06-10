@@ -5,7 +5,11 @@ import axios from 'axios';
 
 const rickMortyApi = 'https://rickandmortyapi.com/api/';
 
-export function getCharacters(id) {
+export function getCharacters(ids) {
+  return axios.get(rickMortyApi + 'character/' + ids);
+}
+
+export function getCharacter(id) {
   return axios.get(rickMortyApi + 'character/' + id);
 }
 
