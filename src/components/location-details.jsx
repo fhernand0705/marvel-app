@@ -5,8 +5,15 @@ function LocationDetails({locations}) {
     <div>
       { locations.map((place, i) =>
           <div key={i}>
-            <div>{place.name}</div>
+            <h1>{place.name}</h1>
             <div>{place.dimension}</div>
+            { place.residents.map(res =>
+              <ul key={res.data.id}>
+                <li>{res.data.name}</li>
+                <li><img src={res.data.image} alt=""/></li>
+              </ul>
+             )
+            }
           </div>
       )}
     </div>

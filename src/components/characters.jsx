@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import CharacterDetails from './character-details';
+import LoadMoreDataButton from './load-more-data-button';
 import Search from './common/search';
 import CheckboxWrapper from './common/checkbox-wrapper';
 import { getCharacters, getCharacterCount } from '../services/api-service';
@@ -85,6 +87,8 @@ function Characters() {
     setFilteredCharacters(sortedChars);
   }
 
+  const charsLength = filteredCharacters.length;
+
   return (
     <div>
       {characters.charsCount && <h2>Characters: {characters.charsCount}</h2>}
@@ -95,11 +99,21 @@ function Characters() {
 
       <CheckboxWrapper checkedItems={checkedItems} onChange={handleFilter} />
 
-      <CharacterDetails
-        characters={characters}
-        onChange={handleLoadMoreData}
-        filtered={filteredCharacters}
-      />
+      <CharacterDetails>
+        {
+          filteredCharacters.map((char,i) =>
+            <div key={i}>
+              <NavLink to={`/character/${char.id}`}>{char.name}</NavLink>
+              <div>{char.species}</div>
+              <img src={char.image} alt=""/>
+            </div>
+        )}
+        {
+          charsLength > 0 && charsLength < characters.charsCount ?
+          <LoadMoreDataButton onClick={handleLoadMoreData}/> : null
+        }
+        {!charsLength && <div>Characters not found</div>}
+      </CharacterDetails>
     </div>
   )
 }
