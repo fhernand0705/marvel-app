@@ -10,16 +10,20 @@ function Profile() {
   const [character, setCharacter] = useState({});
 
   useEffect(() => {
-    async function fetchCharacter() {
+    fetchCharacter();
+  }, [charId])
+
+  async function fetchCharacter() {
+    try {
       const { data } = await getCharacter(charId);
       const character = data;
       console.log(data);
 
-      setCharacter(character)
+      setCharacter(character);
+    } catch(e) {
+      // display error message if error occurs
     }
-    fetchCharacter();
-  }, [charId])
-
+  }
   const history = useHistory();
   function handleClick() { history.push('/characters') }
 

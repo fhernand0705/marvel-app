@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import CharacterDetails from './character-details';
-import LoadMoreDataButton from './load-more-data-button';
+import LoadMoreDataButton from './common/load-more-data-button';
 import Search from './common/search';
 import CheckboxWrapper from './common/checkbox-wrapper';
 import { getCharacters, getCharacterCount } from '../services/api-service';
 import { filterByName, filterBySpecies } from '../utils/filter-methods';
+import { sortAlpha } from '../utils/sort';
 
 function Characters() {
   const [characters, setCharacters] = useState({
@@ -30,12 +31,12 @@ function Characters() {
   async function fetchCharacters() {
     try {
       const data = async () => {
-        const arrOfPromises = [];
+        const promises = [];
         const ids = [...Array(idList).keys()];
 
-        arrOfPromises.push(getCharacters(ids))
+        promises.push(getCharacters(ids))
         // RETURNED SERVER DATA
-        return Promise.all(arrOfPromises);
+        return Promise.all(promises);
       }
 
       const res1 = await data();
@@ -44,7 +45,7 @@ function Characters() {
       const characters = res1.map(character => character.data)
 
       // IF MARVEL API, CONCAT RESPONSE ARRAY TO EMPTY ARRAY
-      setCharacters({...characters, chars: characters[0], charsCount })
+      setCharacters({...characters, chars: characters[0], charsCount });
       setFilteredCharacters(characters[0]);
     } catch(e) {
       if (e) setError('Oops, there was an error with your request.');
@@ -76,13 +77,8 @@ function Characters() {
   }
   function handleSort() {
     setIsAscending((prevState) => prevState = !prevState);
-
-    const sortedChars = filteredCharacters.sort((a,b) => {
-      const aZ = a.name[0].toLowerCase(), zA = b.name[0].toLowerCase();
-
-      return !isAscending ? aZ.localeCompare(zA)
-      : zA.localeCompare(aZ);
-    })
+    const characters = filteredCharacters;
+    const sortedChars = sortAlpha(characters, isAscending);
 
     setFilteredCharacters(sortedChars);
   }
@@ -108,12 +104,12 @@ function Characters() {
               <img src={char.image} alt=""/>
             </div>
         )}
-        {
-          charsLength > 0 && charsLength < characters.charsCount ?
-          <LoadMoreDataButton onClick={handleLoadMoreData}/> : null
-        }
-        {!charsLength && <div>Characters not found</div>}
       </CharacterDetails>
+      {
+        charsLength > 0 && charsLength < characters.charsCount ?
+        <LoadMoreDataButton onClick={handleLoadMoreData}/> : null
+      }
+      {!charsLength && <div>Characters not found</div>}
     </div>
   )
 }

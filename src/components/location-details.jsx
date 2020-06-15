@@ -4,6 +4,7 @@ function LocationDetails({locations}) {
   return (
     <div>
       { locations.map((place, i) =>
+        place.name !== "unknown" &&
           <div key={i}>
             <h1>{place.name}</h1>
             <div>{place.dimension}</div>
@@ -13,11 +14,13 @@ function LocationDetails({locations}) {
                 <li><img src={res.data.image} alt=""/></li>
               </ul>
              )
-            }
+             }
           </div>
       )}
     </div>
   )
 }
+
+
 
 export default LocationDetails;
