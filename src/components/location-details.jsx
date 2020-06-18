@@ -4,7 +4,7 @@ function LocationDetails({locations}) {
   return (
     <div>
       { locations.map((place, i) =>
-        place.name !== "unknown" &&
+       place.name !== "unknown" && place.residents.length &&
           <div key={i}>
             <h1>{place.name}</h1>
             <div>{place.dimension}</div>
