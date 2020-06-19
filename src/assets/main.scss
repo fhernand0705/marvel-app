@@ -15,6 +15,33 @@ h1 {
   color: red;
 }
 
-main {
-  margin: 0 .5em
+.navbar {
+  display: flex; 
+  background-image: linear-gradient(45deg, orange, rgba(80, 33, 221, 0.87));
 }
+
+.navbar-items {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  list-style: none;
+  padding: 0 .5em;
+}
+
+.app-logo, .app-title { 
+  flex: .38;
+  flex-basis: 10em;  
+    img { 
+      border-radius: 6em; 
+      border: solid whitesmoke;
+      width: 5em;
+      //min-width: 4em;
+    }
+}
+
+.nav-link { 
+  flex: .1; 
+  margin: 1em .5em;
+    a { text-decoration: none; }
+}
+ 
