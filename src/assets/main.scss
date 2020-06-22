@@ -1,3 +1,5 @@
+@import "~bootstrap/scss/bootstrap";
+
 body {
   margin: 0;
   font-family: sans-serif;
@@ -35,13 +37,34 @@ h1 {
       border-radius: 6em; 
       border: solid whitesmoke;
       width: 5em;
-      //min-width: 4em;
     }
 }
 
 .nav-link { 
   flex: .1; 
   margin: 1em .5em;
-    a { text-decoration: none; }
+    a { 
+      text-decoration: none; 
+      color: orange;
+    }
+}
+
+.dropdown, .col {display: none;}
+
+@media (min-width: 20em) and (max-width: 550px) {
+  .nav-link { display: none; }
+  .app-title { display: none; }
+  .dropdown-wrapper { flex: .1em; }
+  .dropdown, .col, #nav-dropdown { 
+    display: block; 
+    color: whitesmoke; 
+  }
+  .dropdown-toggle::after { color: orange;}
+  .dropdown-menu.show {
+    min-width: 0; 
+    transform: translate3d(-6px, 42px, 0px) !important;
+  }
+  .dropdown-item { color: purple; }
+  
 }
  

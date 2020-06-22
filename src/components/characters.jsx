@@ -12,7 +12,7 @@ import { sortAlpha } from '../utils/sort';
 function Characters({isFetching, idList, loadData, setFetching}) {
   const [characters, setCharacters] = useState({
     chars: [],
-    charsCount: null
+    charsTotalCount: null
   });
   const [filteredCharacters, setFilteredCharacters] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -101,7 +101,7 @@ function Characters({isFetching, idList, loadData, setFetching}) {
         )}
       </CharacterDetails>
       {
-        charsLength > 0 && charsLength < characters.charsCount ?
+        charsLength > 0 && charsLength < characters.charsTotalCount ?
         <LoadMoreDataButton onClick={loadData}/> : null
       }
       {!charsLength && <div>Characters not found</div>}
