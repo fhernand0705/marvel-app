@@ -12,10 +12,10 @@ function withLoadData(Component) {
             return (
                 <div>
                     <Component 
-                        idList={idList} 
-                        isFetching={isFetching} 
-                        loadData={handleLoadMoreData}
-                        setFetching={setIsFetching}
+                       idList={idList} 
+                       isFetching={isFetching} 
+                       loadData={handleLoadMoreData}
+                       setFetching={setIsFetching}
                     />
                 </div>
             )

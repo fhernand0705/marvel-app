@@ -13,7 +13,7 @@ function LocationDetails({locations}) {
                 <li>{res.data.name}</li>
                 <li><img src={res.data.image} alt=""/></li>
               </ul>
-             )
+              )
              }
           </div>
       )}

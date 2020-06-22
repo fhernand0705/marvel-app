@@ -11,8 +11,8 @@ function Navbar() {
         <ul className="navbar-items">
           <li className="app-logo"><img src={app_logo} alt="App Logo"/></li>
           <li className="app-title"><h4>Rick and Morty</h4></li>
-          <li className="nav-link"><NavLink to='/characters'>Characters</NavLink></li>
-          <li className="nav-link"><NavLink to='/locations'>Locations</NavLink></li>
+          <li className="nav-item"><NavLink to='/characters'>Characters</NavLink></li>
+          <li className="nav-item"><NavLink to='/locations'>Locations</NavLink></li>
           <li className="col"></li>
           <li className="dropdown-wrapper">
             <NavDropdown title="Get Schwifty" id="nav-dropdown">

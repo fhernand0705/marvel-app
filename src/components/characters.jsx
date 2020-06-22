@@ -82,13 +82,10 @@ function Characters({isFetching, idList, loadData, setFetching}) {
 
   return (
     <div>
-      {characters.charsCount && <h2>Characters: {characters.charsCount}</h2>}
-      {filteredCharacters && <h4>Characters Found: {filteredCharacters.length}</h4>}
       {error && <h4>{error}</h4>}
-      <input type="checkbox" name="sort" onChange={handleSort}/>
       <Search searchQuery={searchQuery} onChange={handleSearch} />
-
       <CheckboxWrapper checkedItems={checkedItems} onChange={handleFilter} />
+      <input type="checkbox" name="sort" onChange={handleSort}/>
 
       <CharacterDetails>
         {

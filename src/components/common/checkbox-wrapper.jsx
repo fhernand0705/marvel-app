@@ -1,25 +1,30 @@
 import React from 'react';
 import Checkbox from './checkbox';
 import checkboxes from '../../utils/checkboxes';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import '../../assets/main.scss';
 
 function CheckboxWrapper({onChange, checkedItems}) {
 
   return (
     <React.Fragment>
-      <div>
+      <NavDropdown title="Filter By">
+        <div className="category-title"><span>Species</span></div>
       {
         checkboxes.map(item =>
-          <label key={item.name}>
+          <NavDropdown.Item eventKey="4.1">
+            <label key={item.name} className="label-wrapper">
               {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
               <Checkbox
                 name={item.name}
                 checked={checkedItems.get(item.name)}
                 onChange={onChange}
               />
-          </label>
+            </label>
+          </NavDropdown.Item>
         )
       }
-      </div>
+      </NavDropdown>
     </React.Fragment>
   )
 }

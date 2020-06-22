@@ -7,9 +7,11 @@ import { getLocations } from '../services/api-service';
 
 function Locations({isFetching, idList, loadData, setFetching}) {
   const [locations, setLocations] = useState([]);
+  const [isLoading, setIsLoading] = useState(false); 
 
   useEffect(() => {
-    fetchLocations();
+    fetchLocations(); 
+    setIsLoading(true);
 
     if (!isFetching) return;
     fetchMoreLocations();
@@ -40,8 +42,9 @@ function Locations({isFetching, idList, loadData, setFetching}) {
 
       locations.map((place,i) => place.residents = residentByLocation[i])
       console.log(locations)
-
-      setLocations([...locations, ...locations])
+      
+      setLocations([...locations, ...locations]);
+      setIsLoading(false);
     } catch(e) {
       // do something after error occurs
    }
@@ -54,9 +57,10 @@ function Locations({isFetching, idList, loadData, setFetching}) {
 
   return (
     <React.Fragment>
+      {isLoading && <div>Loading Data</div>}
       <LocationDetails locations={locations}/>
       {isFetching && <div>Fetching more locations</div>}
-      <LoadMoreDataButton onClick={loadData} />
+      {!isLoading && <LoadMoreDataButton onClick={loadData} />}
     </React.Fragment>
   )
 }

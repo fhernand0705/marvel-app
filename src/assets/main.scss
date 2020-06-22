@@ -17,6 +17,7 @@ h1 {
   color: red;
 }
 
+// NAVBAR
 .navbar {
   display: flex; 
   background-image: linear-gradient(45deg, orange, rgba(80, 33, 221, 0.87));
@@ -40,7 +41,7 @@ h1 {
     }
 }
 
-.nav-link { 
+.nav-item { 
   flex: .1; 
   margin: 1em .5em;
     a { 
@@ -51,8 +52,32 @@ h1 {
 
 .dropdown, .col {display: none;}
 
+// SEARCH BOX 
+.search-box-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 1em 0;
+  
+}
+
+.search-box {
+
+  @media (min-width: 20em) and (max-width: 550px) {
+    width: 80%;
+  }
+}
+
+// FILTER SECTION 
+.category-title { margin: 0 .5em; }
+.label-wrapper {
+  display: grid;
+  grid-template-columns: 5em .5em;
+}
+.checkbox { margin: .25em .25em; }
+
+// MOBILE NAVBAR
 @media (min-width: 20em) and (max-width: 550px) {
-  .nav-link { display: none; }
+  .nav-item { display: none; }
   .app-title { display: none; }
   .dropdown-wrapper { flex: .1em; }
   .dropdown, .col, #nav-dropdown { 
