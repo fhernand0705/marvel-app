@@ -68,6 +68,23 @@ h1 {
 }
 
 // FILTER SECTION 
+.dropdown-filter-wrapper { 
+  position: relative;
+  margin: 2em .5em; 
+}
+.dropdown-filter-link { 
+  cursor: pointer; 
+  width: fit-content;
+}
+.dropdown-filter-content {
+  display: block; 
+  position: absolute; 
+  width: 8em; 
+  background-color:whitesmoke;
+  z-index: 1;
+  box-shadow: 0 10px 15px 0 rgba(0,0,0,0.2); 
+}
+.dropdown-filter-item { margin: .5em; }
 .category-title { margin: 0 .5em; }
 .label-wrapper {
   display: grid;
@@ -89,7 +106,15 @@ h1 {
     min-width: 0; 
     transform: translate3d(-6px, 42px, 0px) !important;
   }
-  .dropdown-item { color: purple; }
-  
+  .dropdown-item { color: purple; } 
+}
+
+.loading-img {
+  text-align: center;
+  margin: 7em 0;
+    img {
+      width: 10em;
+      border-radius: 6em;
+    }
 }
  

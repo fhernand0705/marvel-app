@@ -4,6 +4,7 @@ import LocationDetails from './location-details';
 import LoadMoreDataButton from './common/load-more-data-button';
 import withLoadData from './hoc/withLoadData';
 import { getLocations } from '../services/api-service';
+import loading_img from '../assets/images/loading-img.gif';
 
 function Locations({isFetching, idList, loadData, setFetching}) {
   const [locations, setLocations] = useState([]);
@@ -57,7 +58,11 @@ function Locations({isFetching, idList, loadData, setFetching}) {
 
   return (
     <React.Fragment>
-      {isLoading && <div>Loading Data</div>}
+      {isLoading && 
+        <div className="loading-img">
+          <img  src={loading_img} alt="loading-img"/>
+        </div>
+      }
       <LocationDetails locations={locations}/>
       {isFetching && <div>Fetching more locations</div>}
       {!isLoading && <LoadMoreDataButton onClick={loadData} />}
