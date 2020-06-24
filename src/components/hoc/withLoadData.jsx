@@ -8,7 +8,7 @@ function withLoadData(Component) {
             function handleLoadMoreData() {
                 setIdList((idList) => idList + 5);
                 setIsFetching(true);
-              }
+            }
             return (
                 <div>
                     <Component 
