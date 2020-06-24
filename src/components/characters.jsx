@@ -4,7 +4,7 @@ import CharacterDetails from './character-details';
 import LoadMoreDataButton from './common/load-more-data-button';
 import Search from './common/search';
 import CheckboxWrapper from './common/checkbox-wrapper';
-import Form from './common/form';
+import Switch from './common/switch';
 import withLoadData from './hoc/withLoadData';
 import { getCharacters, getCharacterCount } from '../services/api-service';
 import { filterByName, filterBySpecies } from '../utils/filter-methods';
@@ -60,7 +60,7 @@ function Characters({isFetching, idList, loadData, setFetching}) {
   function handleSearch({target}) {
     setSearchQuery(target.value);
     const chars = [...characters.chars];
-    
+
     return target.value ? setFilteredCharacters(filterByName(searchQuery, chars)) : setFilteredCharacters(chars);
   }
   function handleFilter({target}) {
@@ -89,14 +89,16 @@ function Characters({isFetching, idList, loadData, setFetching}) {
     <div>
       {error && <h4>{error}</h4>}
       <Search searchQuery={searchQuery} onChange={handleSearch} />
-      <CheckboxWrapper 
-        checkedItems={checkedItems} 
-        isHidden={isHidden}
-        onChange={handleFilter} 
-        onClick={handleToggleDropdown}
-      />
-      <Form handleSort={handleSort}/>
-
+      <div className="filter-sort-wrapper">
+        <CheckboxWrapper 
+          checkedItems={checkedItems} 
+          isHidden={isHidden}
+          onChange={handleFilter} 
+          onClick={handleToggleDropdown}
+        />
+        <Switch onChange={handleSort}/>
+      </div>
+      
       <CharacterDetails>
         {
           filteredCharacters.map((char,i) =>

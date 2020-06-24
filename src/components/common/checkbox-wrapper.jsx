@@ -1,6 +1,7 @@
 import React from 'react';
 import Checkbox from './checkbox';
 import checkboxes from '../../utils/checkboxes';
+import { GoTriangleDown } from 'react-icons/go'
 import '../../assets/main.scss';
 
 function CheckboxWrapper({onChange, checkedItems, onClick, isHidden}) {
@@ -8,7 +9,10 @@ function CheckboxWrapper({onChange, checkedItems, onClick, isHidden}) {
   return (
     <React.Fragment>
       <div className="dropdown-filter-wrapper">
-        <div onClick={onClick} className="dropdown-filter-link">Filter By</div> 
+        <p onClick={onClick} className="dropdown-filter-link">
+          Filter By 
+          <span><GoTriangleDown/></span>
+        </p> 
         {!isHidden && 
           <div className="dropdown-filter-content">
             <div className="category-title"><span>Species</span></div>
