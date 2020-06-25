@@ -21,6 +21,7 @@ h1 {
 .navbar {
   display: flex; 
   background-image: linear-gradient(45deg, orange, rgba(80, 33, 221, 0.87));
+  height: 6em;
 }
 
 .navbar-items {
@@ -41,12 +42,25 @@ h1 {
     }
 }
 
+.app-title h4 {
+  font-family: 'get schwifty', sans-serif;
+  font-size: 2em;
+  color: purple;
+  text-shadow: 1px 1px orange;
+  margin: .5em 0;
+}
+
 .nav-item { 
   flex: .1; 
   margin: 1em .5em;
     a { 
       text-decoration: none; 
       color: orange;
+      transition: .3s ease-in-out;
+    }
+    a:hover {
+      font-size: 1.1em;
+      text-shadow: 1px 1px purple;
     }
 }
 
@@ -56,12 +70,18 @@ h1 {
 .search-box-wrapper {
   display: flex;
   justify-content: center;
-  margin: 1em 0;
-  
+  background: linear-gradient(45deg, rgba(0,0,0,.6), rgba(0,0,0,.6)), 
+  url("./images/rick-morty-wallpaper-2.png"); 
+  background-size: cover; 
+  background-position-y: center;
+  height: 18em; 
 }
 
 .search-box {
-  @media (min-width: 20em) and (max-width: 550px) {
+  position: relative;
+  width: 30%;
+  top: 14em;
+  @media (min-width: 20em) and (max-width: 640px) {
     width: 80%;
   }
 }
@@ -71,6 +91,16 @@ h1 {
   display: flex;
   flex-direction: row;
   align-items: center;
+
+    @media (min-width: 1200px) {
+      flex-direction: column;
+      position: sticky;
+      top: 1em;
+      border-radius: 1em;
+      padding: 2em; 
+      width: fit-content;
+      z-index: 1000;
+    }
 }
 
 // FILTER SECTION 
@@ -192,8 +222,65 @@ input:checked + .slider .desc
   border-radius: 50%;
 }
 
+// CHARACTER CARD
+.character-wrapper, .char-list-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.char-list-wrapper {
+  position: relative;
+  align-items: center;
+  transition: .3s ease-in-out;
+
+  @media (min-width: 640px) {
+    display: grid;
+    justify-content: center; 
+    grid-template-columns: 20em 20em;
+    grid-column-gap: .5em;
+  }
+
+  @media (min-width: 1040px) {
+    grid-template-columns: 20em 20em 20em;
+  }
+  @media (min-width: 1200px) {
+    justify-content: right;
+    top: -13.5em;
+  }
+}
+.card-content {
+  margin: 1em 1em;
+  width: 18.5em;
+  border-top-left-radius: 50em;
+  border-top-right-radius: 50em;
+  background-color: orange;
+  border-bottom-left-radius: 15em;
+  border-bottom-right-radius: 15em;
+  transition: .3s ease-in-out;
+}
+.card-content:hover {
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.5);
+  transform: scale(1.025);
+}
+.char-img {
+  width: 18.5em;
+  border-radius: 3em;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.card-text { padding: 1em 2em 1em; }
+.status-alive { color: green; }
+.status-dead { color: red; }
+.status-alive, .status-dead {
+  margin: 0 .25em;
+  font-size: 1.25em;
+}
+.status::before {
+  content: "—"; 
+}
+.origin-header { color: #fffc; }
+
 // MOBILE NAVBAR
-@media (min-width: 20em) and (max-width: 550px) {
+@media (min-width: 20em) and (max-width: 640px) {
   .nav-item { display: none; }
   .app-title { display: none; }
   .dropdown-wrapper { flex: .1; }
@@ -207,6 +294,7 @@ input:checked + .slider .desc
     transform: translate3d(-6px, 42px, 0px) !important;
   }
   .dropdown-item { color: purple; } 
+  
 }
 
 .loading-img {

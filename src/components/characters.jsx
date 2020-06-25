@@ -6,6 +6,7 @@ import Search from './common/search';
 import CheckboxWrapper from './common/checkbox-wrapper';
 import Switch from './common/switch';
 import withLoadData from './hoc/withLoadData';
+import {BsFillPersonFill} from 'react-icons/bs'
 import { getCharacters, getCharacterCount } from '../services/api-service';
 import { filterByName, filterBySpecies } from '../utils/filter-methods';
 import { sortAlpha } from '../utils/sort';
@@ -83,10 +84,11 @@ function Characters({isFetching, idList, loadData, setFetching}) {
     setIsHidden((prev) => prev = !prev); 
   }
 
+  //console.log(characters)
   const charsLength = filteredCharacters.length;
 
   return (
-    <div>
+    <div className="character-wrapper">
       {error && <h4>{error}</h4>}
       <Search searchQuery={searchQuery} onChange={handleSearch} />
       <div className="filter-sort-wrapper">
@@ -102,18 +104,39 @@ function Characters({isFetching, idList, loadData, setFetching}) {
       <CharacterDetails>
         {
           filteredCharacters.map((char,i) =>
-            <div key={i}>
-              <NavLink to={`/character/${char.id}`}>{char.name}</NavLink>
-              <div>{char.species}</div>
-              <img src={char.image} alt=""/>
+            <div key={i} className="card-wrapper">
+              <div className="card-content">
+                <img src={char.image} className="char-img" alt="character_image"/>
+                <div className="card-text">
+                <NavLink to={`/character/${char.id}`}>
+                  <h4>{char.name}</h4>
+                </NavLink>
+                <div>
+                  <span>{char.species}</span>
+                  <span className="status">
+                    {char.status.charAt(0).toUpperCase() + char.status.slice(1)}
+                  </span>
+                  <span 
+                    className={char.status === 'Alive' ? 'status-alive' : 'status-dead'
+                  }>
+                    <BsFillPersonFill/>
+                  </span>
+                </div>
+                <div>
+                  <span className="origin-header">Original Location:</span>
+                  <p>{char.origin.name}</p>
+                </div>
+                </div>
+              </div>
             </div>
         )}
       </CharacterDetails>
-      {
-        charsLength > 0 && charsLength < characters.charsTotalCount ?
-        <LoadMoreDataButton onClick={loadData}/> : null
-      }
-      {!charsLength && <div>Characters not found</div>}
+        {
+          charsLength > 0 && charsLength < characters.charsTotalCount ?
+          <LoadMoreDataButton onClick={loadData}/> : null
+        }
+        {!charsLength && <div>Characters not found</div>}
+      
     </div>
   )
 }
