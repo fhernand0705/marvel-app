@@ -3,6 +3,7 @@
 body {
   margin: 0;
   font-family: sans-serif;
+  background-color: rgba(0,0,0,.05);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -58,10 +59,11 @@ h1 {
       color: orange;
       transition: .3s ease-in-out;
     }
-    a:hover {
-      font-size: 1.1em;
-      text-shadow: 1px 1px purple;
-    }
+}
+
+a:hover {
+  transform: scale(1.1);
+  text-shadow: 1px 1px purple;
 }
 
 .dropdown, .col {display: none;}
@@ -79,10 +81,10 @@ h1 {
 
 .search-box {
   position: relative;
-  width: 30%;
+  width: 40%;
   top: 14em;
   @media (min-width: 20em) and (max-width: 640px) {
-    width: 80%;
+    width: 70%;
   }
 }
 
@@ -91,6 +93,9 @@ h1 {
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: #fff;
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
+  margin: 1.5em 2em; 
 
     @media (min-width: 1200px) {
       flex-direction: column;
