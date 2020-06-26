@@ -102,6 +102,7 @@ function Characters({isFetching, idList, loadData, setFetching}) {
       </div>
       
       <CharacterDetails>
+        <div className="char-list-wrapper">
         {
           filteredCharacters.map((char,i) =>
             <div key={i} className="card-wrapper">
@@ -130,6 +131,7 @@ function Characters({isFetching, idList, loadData, setFetching}) {
               </div>
             </div>
         )}
+        </div>
       </CharacterDetails>
         {
           charsLength > 0 && charsLength < characters.charsTotalCount ?

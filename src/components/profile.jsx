@@ -27,15 +27,25 @@ function Profile() {
   const history = useHistory();
   function handleClick() { history.push('/characters') }
 
-  const {name, species, status} = character;
+  const {name, species, status, image} = character;
 
   return (
     <React.Fragment>
-      <BackButton onChange={handleClick} />
+    
       <CharacterDetails>
-        <h1>{name}</h1>
-        <p>{species}</p>
-        <p>{status}</p>
+        <div className="profile-container">
+          <div className="text-wrapper">
+            <BackButton onChange={handleClick} />
+            <div className="text-content">
+              <h1>{name}</h1>
+              <p>{species}</p>
+              <p>{status}</p>
+            </div>
+          </div>
+          <div className="img-wrapper">
+            <img src={image} alt="character_image"/>
+          </div>
+        </div>
       </CharacterDetails>
     </React.Fragment>
   )

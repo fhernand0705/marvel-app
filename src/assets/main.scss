@@ -311,5 +311,31 @@ input:checked + .slider .desc
     }
 }
 
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  background: rgba(0,0,0,.05);
+}
+
+.text-wrapper {
+  flex: .5;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  margin: 3em; 
+}
+
+.img-wrapper {
+  flex: .5;
+  mask-image: linear-gradient(to right, black 65%, transparent 80%);
+    img {
+      width: 32.1em; 
+      height: auto;
+      mask-image: linear-gradient(to right, transparent 5%, black 35%);
+    }
+}
+
 
  
