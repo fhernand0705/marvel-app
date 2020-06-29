@@ -2,19 +2,26 @@ import React, { useState } from 'react';
 
 function withLoadData(Component) {
     return function WithLoadData() {
-            const [idList, setIdList] = useState(10);
+            const [locationIdList, setLocationIdList] = useState(2);
+            const [characterIdList, setCharacterIdList] = useState(10); 
             const [isFetching, setIsFetching] = useState(false);
             
-            function handleLoadMoreData() {
-                setIdList((idList) => idList + 5);
+            function handleLoadLocations() {
+                setLocationIdList((idList) => idList + 2);
+                setIsFetching(true);
+            }
+            function handleLoadCharacters() {
+                setCharacterIdList((idList) => idList + 10);
                 setIsFetching(true);
             }
             return (
                 <div>
                     <Component 
-                       idList={idList} 
+                       locationIdList={locationIdList}
+                       characterIdList={characterIdList} 
                        isFetching={isFetching} 
-                       loadData={handleLoadMoreData}
+                       loadLocationData={handleLoadLocations}
+                       loadCharacterData={handleLoadCharacters}
                        setFetching={setIsFetching}
                     />
                 </div>

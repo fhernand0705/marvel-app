@@ -5,7 +5,12 @@ import { GoTriangleDown } from 'react-icons/go'
 import '../../assets/main.scss';
 
 function CheckboxWrapper({onChange, checkedItems, onClick, isHidden}) {
-   
+  function slideDown() {
+    let className = "dropdown-filter-content"; 
+    if (!isHidden) 
+      className += " active"; 
+    return className;   
+  }
   return (
     <React.Fragment>
       <div className="dropdown-filter-wrapper">
@@ -14,7 +19,7 @@ function CheckboxWrapper({onChange, checkedItems, onClick, isHidden}) {
           <span><GoTriangleDown/></span>
         </p> 
         {!isHidden && 
-          <div className="dropdown-filter-content">
+          <div className={slideDown()}>
             <div className="category-title"><span>Species</span></div>
               <hr/>
               { checkboxes.map(item =>

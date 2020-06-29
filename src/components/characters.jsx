@@ -11,7 +11,7 @@ import { getCharacters, getCharacterCount } from '../services/api-service';
 import { filterByName, filterBySpecies } from '../utils/filter-methods';
 import { sortAlpha } from '../utils/sort';
 
-function Characters({isFetching, idList, loadData, setFetching}) {
+function Characters({isFetching, characterIdList, loadCharacterData, setFetching}) {
   const [characters, setCharacters] = useState({
     chars: [],
     charsTotalCount: null
@@ -28,13 +28,13 @@ function Characters({isFetching, idList, loadData, setFetching}) {
 
     if (!isFetching) return;
     fetchMoreCharacters();
-  },[isFetching, idList]);
+  },[isFetching, characterIdList]);
 
   async function fetchCharacters() {
     try {
       const data = async () => {
         const promises = [];
-        const ids = [...Array(idList).keys()];
+        const ids = [...Array(characterIdList).keys()];
 
         promises.push(getCharacters(ids))
         // RETURNED SERVER DATA
@@ -54,7 +54,7 @@ function Characters({isFetching, idList, loadData, setFetching}) {
     }
   }
   function fetchMoreCharacters() {
-    if (idList > 820) return;
+    if (characterIdList > 820) return;
     fetchCharacters();
     setFetching(prev => prev = !prev);
   }
@@ -81,65 +81,68 @@ function Characters({isFetching, idList, loadData, setFetching}) {
     setFilteredCharacters(sortedChars);
   }
   function handleToggleDropdown() {
-    setIsHidden((prev) => prev = !prev); 
+    setIsHidden((isHidden) => isHidden = !isHidden); 
   }
 
   //console.log(characters)
   const charsLength = filteredCharacters.length;
 
   return (
-    <div className="character-wrapper">
+    <div>
       {error && <h4>{error}</h4>}
       <Search searchQuery={searchQuery} onChange={handleSearch} />
-      <div className="filter-sort-wrapper">
-        <CheckboxWrapper 
-          checkedItems={checkedItems} 
-          isHidden={isHidden}
-          onChange={handleFilter} 
-          onClick={handleToggleDropdown}
-        />
-        <Switch onChange={handleSort}/>
-      </div>
+      <div className="character-wrapper">
+        <div className="menu-container">
+          <div className="filter-sort-wrapper">
+            <CheckboxWrapper 
+              checkedItems={checkedItems} 
+              isHidden={isHidden}
+              onChange={handleFilter} 
+              onClick={handleToggleDropdown}
+            />
+            <Switch onChange={handleSort}/>
+          </div>
+        </div>
       
-      <CharacterDetails>
-        <div className="char-list-wrapper">
-        {
-          filteredCharacters.map((char,i) =>
-            <div key={i} className="card-wrapper">
-              <div className="card-content">
-                <img src={char.image} className="char-img" alt="character_image"/>
-                <div className="card-text">
-                <NavLink to={`/character/${char.id}`}>
-                  <h4>{char.name}</h4>
-                </NavLink>
-                <div>
-                  <span>{char.species}</span>
-                  <span className="status">
-                    {char.status.charAt(0).toUpperCase() + char.status.slice(1)}
-                  </span>
-                  <span 
-                    className={char.status === 'Alive' ? 'status-alive' : 'status-dead'
-                  }>
-                    <BsFillPersonFill/>
-                  </span>
-                </div>
-                <div>
-                  <span className="origin-header">Original Location:</span>
-                  <p>{char.origin.name}</p>
-                </div>
+        <CharacterDetails>
+          <div className="char-list-wrapper">
+          {
+            filteredCharacters.map((char,i) =>
+              <div key={i} className="card-wrapper">
+                <div className="card-content">
+                  <img src={char.image} className="char-img" alt="character_image"/>
+                  <div className="card-text">
+                  <NavLink to={`/character/${char.id}`}>
+                    <h4>{char.name}</h4>
+                  </NavLink>
+                  <div>
+                    <span>{char.species}</span>
+                    <span className="status">
+                      {char.status.charAt(0).toUpperCase() + char.status.slice(1)}
+                    </span>
+                    <span 
+                      className={char.status === 'Alive' ? 'status-alive' : 'status-dead'
+                    }>
+                      <BsFillPersonFill/>
+                    </span>
+                  </div>
+                  <div>
+                    <span className="origin-header">Original Location:</span>
+                    <p>{char.origin.name}</p>
+                  </div>
+                  </div>
                 </div>
               </div>
-            </div>
-        )}
-        </div>
-      </CharacterDetails>
+          )}
+          </div>
+          </CharacterDetails>
+      </div>
         {
           charsLength > 0 && charsLength < characters.charsTotalCount ?
-          <LoadMoreDataButton onClick={loadData}/> : null
+          <LoadMoreDataButton onClick={loadCharacterData}/> : null
         }
         {!charsLength && <div>Characters not found</div>}
-      
-    </div>
+    </div>      
   )
 }
 

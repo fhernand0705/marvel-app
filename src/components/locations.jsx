@@ -6,7 +6,7 @@ import withLoadData from './hoc/withLoadData';
 import { getLocations } from '../services/api-service';
 import loading_img from '../assets/images/loading-img.gif';
 
-function Locations({isFetching, idList, loadData, setFetching}) {
+function Locations({isFetching, locationIdList, loadLocationData, setFetching}) {
   const [locations, setLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(false); 
 
@@ -22,17 +22,20 @@ function Locations({isFetching, idList, loadData, setFetching}) {
     try {
       const data = async () => {
         const promises = [];
-        const ids = [...Array(idList).keys()];
+        const ids = [...Array(locationIdList).keys()];
         promises.push(getLocations(ids));
 
         return Promise.all(promises);
      }
       // RETURN LIST OF RESIDENTS (DATA) PER LOCATION
+      //const proxyUrl = "https://cors-anywhere.herokuapp.com/"
       const getResidents = () => {
-        const promises = locations.map(place => {
-          return Promise.all(place.residents.map(resident => axios.get(resident)));
+        const residentPromises = locations.map(place => {
+          return Promise.all(place.residents.map(resident => {
+            return axios.get(resident);
+          })) 
         })
-        return Promise.all(promises);
+        return Promise.all(residentPromises);
       }
 
       const locationData = await data();
@@ -51,7 +54,7 @@ function Locations({isFetching, idList, loadData, setFetching}) {
    }
   }
   function fetchMoreLocations() {
-    if (idList > 94) return;
+    if (locationIdList > 94) return;
       fetchLocations();
       setFetching(false);
   }
@@ -65,7 +68,7 @@ function Locations({isFetching, idList, loadData, setFetching}) {
       }
       <LocationDetails locations={locations}/>
       {isFetching && <div>Fetching more locations</div>}
-      {!isLoading && <LoadMoreDataButton onClick={loadData} />}
+      {!isLoading && <LoadMoreDataButton onClick={loadLocationData} />}
     </React.Fragment>
   )
 }

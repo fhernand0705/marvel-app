@@ -2,10 +2,10 @@ import React from 'react';
 
 function CharacterDetails(props) {
   return (
-    <div>
+    <React.Fragment>
       {props.children}
-    </div>
-  )
+    </React.Fragment>
+  ) 
 }
 
 export default CharacterDetails;
