@@ -131,7 +131,7 @@ a:hover {
   z-index: 1;
   transition: all .3s ease-in-out;
 }
-.active {
+.dropdown-active {
   height: 12em;
 }
 .dropdown-filter-item { margin: .5em; }
@@ -286,6 +286,49 @@ input:checked + .slider .desc
   content: "—"; 
 }
 .origin-header { color: #fffc; }
+
+// LOCATIONS SECTION 
+.locations-wrapper {
+  @media (min-width: 20em) and (max-width: 640px) {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.location-card-wrapper {
+  margin: 3em 0;
+  hr {
+    margin: 1em auto;
+    width: 8em; 
+  } 
+  @media (min-width: 20em) and (max-width: 640px) {
+    
+  }
+}
+
+.location-card-item {
+  @media (min-width: 20em) and (max-width: 640px) {}
+}
+
+.location-card-content {
+  background-color: slategray;
+  margin: 2em 0;
+  height: 23em;
+  border-bottom-right-radius: 3em;
+  border-bottom-left-radius: 3em;
+  border-top-right-radius: 8em;
+  border-top-left-radius: 8em;
+    h5 {
+      padding: 1em 0;
+      text-align: center;
+    }
+    img {
+      border-radius: 3em;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+}
 
 // MOBILE NAVBAR
 @media (min-width: 20em) and (max-width: 640px) {

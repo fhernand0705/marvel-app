@@ -8,7 +8,7 @@ function CheckboxWrapper({onChange, checkedItems, onClick, isHidden}) {
   function slideDown() {
     let className = "dropdown-filter-content"; 
     if (!isHidden) 
-      className += " active"; 
+      className += " dropdown-active"; 
     return className;   
   }
   return (

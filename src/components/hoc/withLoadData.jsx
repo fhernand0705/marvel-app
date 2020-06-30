@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function withLoadData(Component) {
     return function WithLoadData() {
-            const [locationIdList, setLocationIdList] = useState(2);
+            const [locationIdList, setLocationIdList] = useState(3);
             const [characterIdList, setCharacterIdList] = useState(10); 
             const [isFetching, setIsFetching] = useState(false);
             
