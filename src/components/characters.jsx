@@ -112,24 +112,24 @@ function Characters({isFetching, characterIdList, loadCharacterData, setFetching
                 <div className="card-content">
                   <img src={char.image} className="char-img" alt="character_image"/>
                   <div className="card-text">
-                  <NavLink to={`/character/${char.id}`}>
-                    <h4>{char.name}</h4>
-                  </NavLink>
-                  <div>
-                    <span>{char.species}</span>
-                    <span className="status">
-                      {char.status.charAt(0).toUpperCase() + char.status.slice(1)}
-                    </span>
-                    <span 
-                      className={char.status === 'Alive' ? 'status-alive' : 'status-dead'
-                    }>
-                      <BsFillPersonFill/>
-                    </span>
-                  </div>
-                  <div>
-                    <span className="origin-header">Original Location:</span>
-                    <p>{char.origin.name}</p>
-                  </div>
+                    <NavLink to={`/character/${char.id}`}>
+                      <h4>{char.name}</h4>
+                    </NavLink>
+                    <div>
+                      <span>{char.species}</span>
+                      <span className="status">
+                        {char.status.charAt(0).toUpperCase() + char.status.slice(1)}
+                      </span>
+                      <span 
+                        className={char.status === 'Alive' ? 'status-alive' : 'status-dead'
+                      }>
+                        <BsFillPersonFill/>
+                      </span>
+                    </div>
+                    <div>
+                      <span className="origin-header">Original Location:</span>
+                      <p>{char.origin.name}</p>
+                    </div>
                   </div>
                 </div>
               </div>

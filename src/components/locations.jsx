@@ -47,7 +47,7 @@ function Locations({isFetching, locationIdList, loadLocationData, setFetching}) 
       locations.map((place,i) => place.residents = residentByLocation[i])
       console.log(locations)
       
-      setLocations([...locations, ...locations]);
+      setLocations([...locations]);
       setIsLoading(false);
     } catch(e) {
       // do something after error occurs
