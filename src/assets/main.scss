@@ -15,7 +15,8 @@ code {
 
 h1 {
   font-family: 'get schwifty', sans-serif;
-  color: red;
+  color: orange;
+  text-shadow: 2px 2px purple
 }
 
 // NAVBAR
@@ -54,17 +55,14 @@ h1 {
 .nav-item { 
   flex: .1; 
   margin: 1em .5em;
-    a { 
+  .nav-item-link { 
       text-decoration: none; 
       color: orange;
       transition: .3s ease-in-out;
     }
 }
 
-a:hover {
-  transform: scale(1.1);
-  text-shadow: 1px 1px purple;
-}
+.nav-item-link:hover { font-size: 1.1em; }
 
 .dropdown, .col {display: none;}
 
@@ -236,6 +234,11 @@ input:checked + .slider .desc
   flex-direction: column;
 }
 
+.char-section { 
+  display: grid; 
+  justify-content: end;
+}
+
 .character-wrapper { margin: 2em 0; }
 .char-list-wrapper {
   position: relative;
@@ -295,7 +298,7 @@ input:checked + .slider .desc
 
 // LOCATIONS SECTION 
 .locations-main-wrapper {
-  @media (min-width: 20em) and (max-width: 640px) {
+  @media (min-width: 20em) {
     display: flex; 
     flex-direction: column;
   }
@@ -308,6 +311,7 @@ input:checked + .slider .desc
     margin: 1em auto;
     width: 8em; 
   } 
+  h5 { color: purple; }
   @media (min-width: 20em) {
     text-align: center;
     display: flex;
@@ -317,7 +321,7 @@ input:checked + .slider .desc
 }
 
 .location-cards-wrapper {
-  @media (min-width: 640px) {
+  @media (min-width: 600px) {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; 
@@ -328,13 +332,12 @@ input:checked + .slider .desc
 .location-card-content {
   background-color: slategray;
   width: min-content;
-  margin: 2em 0;
+  margin: 2em 2em;
   height: 20em;
   border-bottom-right-radius: 3em;
   border-bottom-left-radius: 3em;
   border-top-right-radius: 8em;
   border-top-left-radius: 8em;
-  @media (min-width: 600px) { margin: 2em 2em; }
     h5 {
       padding: 1em 0;
       text-align: center;
@@ -374,6 +377,7 @@ input:checked + .slider .desc
     }
 }
 
+// PROFILE SECTION
 .profile-container {
   display: flex;
   flex-direction: row;
@@ -398,6 +402,29 @@ input:checked + .slider .desc
       height: auto;
       mask-image: linear-gradient(to right, transparent 5%, black 35%);
     }
+}
+
+// LOAD MORE BUTTON 
+.load-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: .5em 0; 
+}
+
+.load-btn {
+  color: purple;
+  background-color: orange;
+  border: orange; 
+  z-index: 1000;
+  width: 45%;
+  max-width: 50%;
+  transition: .3s ease-in-out;
+}
+
+.load-btn:hover {
+  color: orange;
+  background-color: purple;
+  border: orange;
 }
 
 

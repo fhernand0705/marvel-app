@@ -67,7 +67,7 @@ function Locations({isFetching, locationIdList, loadLocationData, setFetching}) 
         </div>
       }
       <LocationDetails locations={locations}/>
-      {isFetching && <div>Fetching more locations</div>}
+      {isFetching && <div>Fetching more locations...</div>}
       {!isLoading && <LoadMoreDataButton onClick={loadLocationData} />}
     </React.Fragment>
   )
