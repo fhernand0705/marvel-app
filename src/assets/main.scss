@@ -282,7 +282,11 @@ input:checked + .slider .desc
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-.card-text { padding: 1em 2em 1em; }
+.card-text { 
+  padding: 1em 2em 1em; 
+    a { text-decoration: none; }
+    h4 { color: purple; }
+}
 .status-alive { color: green; }
 .status-dead { color: red; }
 .status-alive, .status-dead {
@@ -330,7 +334,7 @@ input:checked + .slider .desc
 }
 
 .location-card-content {
-  background-color: slategray;
+  background-color: purple;
   width: min-content;
   margin: 2em 2em;
   height: 20em;
@@ -338,7 +342,10 @@ input:checked + .slider .desc
   border-bottom-left-radius: 3em;
   border-top-right-radius: 8em;
   border-top-left-radius: 8em;
+  transition: all .3s ease-in-out;
+    a { text-decoration: none; }
     h5 {
+      color: orange;
       padding: 1em 0;
       text-align: center;
     }
@@ -348,6 +355,11 @@ input:checked + .slider .desc
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+}
+
+.location-card-content:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.5);
 }
 
 // MOBILE NAVBAR
@@ -412,8 +424,8 @@ input:checked + .slider .desc
 }
 
 .load-btn {
-  color: purple;
-  background-color: orange;
+  color: purple !important;
+  background-color: orange !important;
   border: orange; 
   z-index: 1000;
   width: 45%;
@@ -422,9 +434,9 @@ input:checked + .slider .desc
 }
 
 .load-btn:hover {
-  color: orange;
-  background-color: purple;
-  border: orange;
+  color: orange !important;
+  background-color: purple !important;
+  border: purple;
 }
 
 
