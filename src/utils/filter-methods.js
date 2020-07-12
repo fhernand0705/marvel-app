@@ -1,8 +1,8 @@
 
 export function filterByName(searchQuery, chars) {
   return (
-    chars.filter(char => {
-    return char.name.toLowerCase().includes(searchQuery.toLowerCase().trim());
+    chars.filter((char,i) => {
+    return char.name.toLowerCase().startsWith(searchQuery.toLowerCase().trim());
   })
  )
 }

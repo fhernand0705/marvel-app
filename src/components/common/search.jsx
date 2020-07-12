@@ -12,7 +12,6 @@ function Search({searchQuery, onChange}) {
       placeholder="Search..."
       />
     </div>
-    
   )
 }
 

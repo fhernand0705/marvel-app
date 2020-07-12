@@ -62,7 +62,7 @@ h1 {
     }
 }
 
-.nav-item-link:hover { font-size: 1.1em; }
+.nav-item-link:hover { color: whitesmoke; }
 
 .dropdown, .col {display: none;}
 
@@ -298,7 +298,12 @@ input:checked + .slider .desc
   content: "—"; 
 }
 
-.origin-header { color: #fffc; }
+.char-origin-header { color: #fffc; }
+.not-found-msg {
+  font-size: 1.5em;
+  color: indianred; 
+  text-align: center;
+}
 
 // LOCATIONS SECTION 
 .locations-main-wrapper {

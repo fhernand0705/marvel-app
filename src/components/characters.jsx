@@ -62,7 +62,7 @@ function Characters({isFetching, characterIdList, loadCharacterData, setFetching
     setSearchQuery(target.value);
     const chars = [...characters.chars];
 
-    return target.value ? setFilteredCharacters(filterByName(searchQuery, chars)) : setFilteredCharacters(chars);
+    return target.value ? setFilteredCharacters(filterByName(target.value, chars)) : setFilteredCharacters(chars);
   }
   function handleFilter({target}) {
     const checkboxName = target.name;
@@ -84,7 +84,6 @@ function Characters({isFetching, characterIdList, loadCharacterData, setFetching
     setIsHidden((isHidden) => isHidden = !isHidden); 
   }
 
-  //console.log(characters)
   const charsLength = filteredCharacters.length;
 
   return (
@@ -128,7 +127,7 @@ function Characters({isFetching, characterIdList, loadCharacterData, setFetching
                         </span>
                       </div>
                       <div>
-                        <span className="origin-header">Original Location:</span>
+                        <span className="char-origin-header">Original Location:</span>
                         <p>{char.origin.name}</p>
                       </div>
                     </div>
@@ -143,8 +142,9 @@ function Characters({isFetching, characterIdList, loadCharacterData, setFetching
           </div>
           </CharacterDetails>
       </div>
-       
-        {!charsLength && <div>Characters not found</div>}
+        <div className="not-found-msg">
+        {!charsLength && <div>No Characters Found...</div>}
+        </div>
     </div>      
   )
 }
