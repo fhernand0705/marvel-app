@@ -42,7 +42,6 @@ function Locations({isFetching, locationIdList, loadLocationData, setFetching}) 
       const locations = locationData[0].data.map(location => location)
       const residents = await getResidents();
       const residentByLocation = residents.map(char => char);
-      //console.log(residents)
 
       locations.map((place,i) => place.residents = residentByLocation[i])
       console.log(locations)

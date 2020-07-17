@@ -7,90 +7,121 @@ import CheckboxWrapper from './common/checkbox-wrapper';
 import Switch from './common/switch';
 import withLoadData from './hoc/withLoadData';
 import {BsFillPersonFill} from 'react-icons/bs'
-import { getCharacters, getCharacterCount } from '../services/api-service';
 import { filterByName, filterBySpecies } from '../utils/filter-methods';
 import { sortAlpha } from '../utils/sort';
+import axios from 'axios';
 
-function Characters({isFetching, characterIdList, loadCharacterData, setFetching}) {
-  const [characters, setCharacters] = useState({
-    chars: [],
-    charsTotalCount: null
-  });
-  const [filteredCharacters, setFilteredCharacters] = useState([]);
+
+function Characters({isFetching, setFetching}) { 
+  const [characters, setCharacters] = useState([]);
+  const [page, setPage] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [checkedItems, setCheckItems] = useState(new Map());
   const [isAscending, setIsAscending] = useState(false);
   const [error, setError] = useState('');
   const [isHidden, setIsHidden] = useState(true); 
-
+  
+  const defaultEndpoint = 'https://rickandmortyapi.com/api/character'; 
+  
   useEffect(() => {
     fetchCharacters();
-
-    if (!isFetching) return;
+  }, []);
+  
+  const { currentPage } = page; 
+  
+  useEffect(() => {
+    if (currentPage === defaultEndpoint) return;
     fetchMoreCharacters();
-  },[isFetching, characterIdList]);
+  },[currentPage]);
 
   async function fetchCharacters() {
+    const data = await axios.get(defaultEndpoint);
+    const { info, results: characters = [] } = data.data;
+    
+    setCharacters(characters);
+    setPage({...page, ...info, currentPage: defaultEndpoint});
+  }
+
+  async function fetchMoreCharacters() {
     try {
-      const data = async () => {
-        const promises = [];
-        const ids = [...Array(characterIdList).keys()];
+      // const storedCharacters = localStorage.getItem('characters');
+      // const storedCharsCount = localStorage.getItem('charactersCount');
+      
+      // if (storedCharacters && storedCharsCount) {
+      //   setCharacters({ 
+      //     ...characters, 
+      //     chars: JSON.parse(storedCharacters),
+      //     charsTotalCount: JSON.parse(storedCharsCount) }); 
+      //   setFilteredCharacters(JSON.parse(storedCharacters));
+      // } else {
+        
+        //localStorage.setItem('characters', JSON.stringify(characters[0]));
+        //localStorage.setItem('charactersCount', JSON.stringify(charsTotalCount));
 
-        promises.push(getCharacters(ids))
-        // RETURNED SERVER DATA
-        return Promise.all(promises);
-      }
+        const res = await axios.get(currentPage);
+        const { info, results } = res.data; 
+        
+        setPage({currentPage, ...info});
+        console.log(res.data); 
 
-      const characterData = await data();
-      const characterCount= await getCharacterCount();
-      const charsTotalCount = characterCount.data.info.count;
-      const characters = characterData.map(character => character.data)
-
-      // IF MARVEL API, CONCAT RESPONSE ARRAY TO EMPTY ARRAY
-      setCharacters({...characters, chars: characters[0], charsTotalCount });
-      setFilteredCharacters(characters[0]);
+        if (!info.prev) {
+          setCharacters(results);
+          return; 
+        }
+        setCharacters(prev => {
+          return [...prev, ...results];
+        })
+        setFetching(prev => prev = !prev);
+      
     } catch(e) {
-      if (e) setError('Oops, there was an error with your request.');
+      if (e) console.log(e.message);
     }
   }
-  function fetchMoreCharacters() {
-    if (characterIdList > 820) return;
-    fetchCharacters();
-    setFetching(prev => prev = !prev);
+
+  function handleLoadMore() {
+    setPage(prev => {
+      return {...prev, currentPage: page.next}
+    })
   }
+
   function handleSearch({target}) {
     setSearchQuery(target.value);
-    const chars = [...characters.chars];
-
-    return target.value ? setFilteredCharacters(filterByName(target.value, chars)) : setFilteredCharacters(chars);
   }
+
   function handleFilter({target}) {
     const checkboxName = target.name;
     const isChecked = target.checked;
-    const chars = [...characters.chars];
+    const chars = [...characters];
 
     setCheckItems(checkedItems => checkedItems.set(checkboxName, isChecked));
 
-    return isChecked ? setFilteredCharacters(filterBySpecies(checkboxName, chars)) : setFilteredCharacters(chars);
+    return (isChecked && characters.length) ? setCharacters(filterBySpecies(checkboxName, chars)) : setCharacters(chars);
   }
+
   function handleSort() {
     setIsAscending((prevState) => prevState = !prevState);
-    const characters = filteredCharacters;
-    const sortedChars = sortAlpha(characters, isAscending);
+    const chars = [...characters];
+    const sortedChars = sortAlpha(chars, isAscending);
 
-    setFilteredCharacters(sortedChars);
+    setCharacters(sortedChars);
   }
+
   function handleToggleDropdown() {
     setIsHidden((isHidden) => isHidden = !isHidden); 
   }
 
-  const charsLength = filteredCharacters.length;
+  function getFilteredCharacters() {
+    return filterByName(searchQuery, characters);
+  }
+
+  const charsLength = characters.length;
 
   return (
     <div>
       {error && <h4>{error}</h4>}
       <Search searchQuery={searchQuery} onChange={handleSearch} />
       <div className="character-wrapper">
+
         <div className="menu-container">
           <div className="filter-sort-wrapper">
             <CheckboxWrapper 
@@ -106,8 +137,7 @@ function Characters({isFetching, characterIdList, loadCharacterData, setFetching
         <CharacterDetails>
           <div className="char-section">
             <div className="char-list-wrapper">
-            {
-              filteredCharacters.map((char,i) =>
+            { getFilteredCharacters().map((char,i) =>
                 <div key={i} className="card-wrapper">
                   <div className="card-content">
                     <img src={char.image} className="char-img" alt="character_image"/>
@@ -135,15 +165,14 @@ function Characters({isFetching, characterIdList, loadCharacterData, setFetching
                 </div>
             )}
             </div>
-              {
-              charsLength > 0 && charsLength < characters.charsTotalCount ?
-              <LoadMoreDataButton onClick={loadCharacterData}/> : null
+              {charsLength > 0 &&
+                <LoadMoreDataButton onClick={handleLoadMore}/> 
               }
           </div>
           </CharacterDetails>
-      </div>
+        </div>
         <div className="not-found-msg">
-        {!charsLength && <div>No Characters Found...</div>}
+          {!charsLength && <div>No Characters Found...</div>}
         </div>
     </div>      
   )
