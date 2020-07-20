@@ -12,7 +12,7 @@ import { sortAlpha } from '../utils/sort';
 import axios from 'axios';
 
 
-function Characters({isFetching, setFetching}) { 
+function Characters() { 
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
@@ -62,7 +62,6 @@ function Characters({isFetching, setFetching}) {
         const { info, results } = res.data; 
         
         setPage({currentPage, ...info});
-        console.log(res.data); 
 
         if (!info.prev) {
           setCharacters(results);
@@ -71,7 +70,6 @@ function Characters({isFetching, setFetching}) {
         setCharacters(prev => {
           return [...prev, ...results];
         })
-        setFetching(prev => prev = !prev);
       
     } catch(e) {
       if (e) console.log(e.message);

@@ -88,9 +88,15 @@ h1 {
 
 // FILTER/SORT SECTION
 .menu-container {
+  display: flex;
   position: sticky; 
   top: 1em;
   z-index: 1000;
+
+  @media (min-width: 20em) and (max-width: 1200px) {
+    position: relative;
+    justify-content: center;
+  }
 }
 
 .filter-sort-wrapper {
@@ -98,7 +104,8 @@ h1 {
   flex-direction: row;
   background-color: #fff;
   box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
-  margin: 1.5em 2em; 
+  margin: 1.5em 2em;
+  width: 20em;  
 
     @media (min-width: 1200px) {
       flex-direction: column;
@@ -237,6 +244,10 @@ input:checked + .slider .desc
 .char-section { 
   display: grid; 
   justify-content: end;
+
+  @media (min-width: 20em) and (max-width: 1200px) {
+    justify-content: center;
+  }
 }
 
 .character-wrapper { margin: 2em 0; }
