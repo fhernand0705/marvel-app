@@ -6,7 +6,7 @@ import Search from './common/search';
 import CheckboxWrapper from './common/checkbox-wrapper';
 import Switch from './common/switch';
 import withLoadData from './hoc/withLoadData';
-import {BsFillPersonFill} from 'react-icons/bs'
+import {BsFillPersonFill} from 'react-icons/bs';
 import { filterByName, filterBySpecies } from '../utils/filter-methods';
 import { sortAlpha } from '../utils/sort';
 import axios from 'axios';
@@ -113,6 +113,7 @@ function Characters() {
   }
 
   const charsLength = characters.length;
+  console.log(characters)
 
   return (
     <div>

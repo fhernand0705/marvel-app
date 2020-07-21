@@ -13,10 +13,10 @@ code {
     monospace;
 }
 
-h1 {
+h1, h4 {
   font-family: 'get schwifty', sans-serif;
   color: orange;
-  text-shadow: 2px 2px purple
+  //text-shadow: 2px 2px purple
 }
 
 // NAVBAR
@@ -413,13 +413,31 @@ input:checked + .slider .desc
 }
 
 .text-wrapper {
+  display: grid;
+  place-items: center;
   flex: .5;
+    .btn {
+      position: absolute;
+      margin: 2em; 
+      background-color: orange;
+      border-color: orange;
+      transition: .3s ease-in-out
+    }
 }
 
+.btn:hover {background-color: darkorange;}
+
 .text-content {
-  display: flex;
-  flex-direction: column;
-  margin: 3em; 
+  background-color: purple;
+  padding: 2em;
+  width: max-content;
+  border-radius: 2em;
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,.6);
+    h1 { margin: 0 0 .5em; } 
+    p, .profile-status { 
+      margin: .5em .5em; 
+      color: whitesmoke;
+    }
 }
 
 .img-wrapper {

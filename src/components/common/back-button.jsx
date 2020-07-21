@@ -2,7 +2,7 @@ import React from 'react';
 
 function BackButton({onChange}) {
   return (
-    <button onClick={() => onChange()}>Back</button>
+    <button className="btn btn-primary" onClick={() => onChange()}>Back</button>
   )
 }
 

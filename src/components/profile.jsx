@@ -3,6 +3,7 @@ import CharacterDetails from './character-details';
 import BackButton from './common/back-button';
 import { useParams, useHistory } from 'react-router-dom';
 import { getCharacter } from '../services/api-service';
+import {BsFillPersonFill} from 'react-icons/bs';
 
 function Profile() {
   const { id } = useParams();
@@ -17,7 +18,7 @@ function Profile() {
     try {
       const { data } = await getCharacter(charId);
       const character = data;
-      console.log(data);
+      console.log(data.origin.name);
 
       setCharacter(character);
     } catch(e) {
@@ -27,19 +28,24 @@ function Profile() {
   const history = useHistory();
   function handleClick() { history.push('/characters') }
 
-  const {name, species, status, image} = character;
-
+  const {name, species, status, image } = character;
+  console.log(character.origin)
   return (
     <React.Fragment>
-    
       <CharacterDetails>
         <div className="profile-container">
           <div className="text-wrapper">
             <BackButton onChange={handleClick} />
             <div className="text-content">
               <h1>{name}</h1>
-              <p>{species}</p>
-              <p>{status}</p>
+              <h4>Species</h4><p>{species}</p>
+              <h4>Status</h4>
+              <span className="profile-status">{status}</span>
+              <span className={
+                status === 'Alive' ? 'status-alive' : 'status-dead'}
+              >
+                <BsFillPersonFill/>
+              </span>
             </div>
           </div>
           <div className="img-wrapper">
