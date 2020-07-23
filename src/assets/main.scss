@@ -23,6 +23,7 @@ h1, h4 {
 .navbar {
   display: flex; 
   background-image: linear-gradient(45deg, orange, rgba(80, 33, 221, 0.87));
+  box-shadow: 0 10px 10px 0 rgba(0,0,0,.2);
   height: 6em;
 }
 
@@ -412,7 +413,7 @@ input:checked + .slider .desc
   display: flex;
   flex-direction: row;
   height: 100vh;
-  background: rgba(0,0,0,.05);
+  background: rebeccapurple;
 
   @media (min-width: 20em) and (max-width: 750px) {
     flex-direction: column;
@@ -444,10 +445,11 @@ input:checked + .slider .desc
     hr { 
       margin: 1.5em auto; 
       width: 50%;
+      background-color: whitesmoke;
     }
     p, .profile-status { 
       margin: .5em .5em; 
-      color: darkslateblue;
+      color: whitesmoke;
     }
    @media (min-width: 20em) and (max-width: 750px) {
      margin: 5em; 
@@ -459,10 +461,10 @@ input:checked + .slider .desc
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;
-  mask-image: linear-gradient(to left, black 85%, transparent 95%);
+  mask-image: linear-gradient(to left, black 80%, transparent 100%);
     @media (min-width: 20em) and (max-width: 750px) {
       text-align: center; 
-      mask-image: linear-gradient(to top, black 65%, transparent 95%);
+      mask-image: linear-gradient(to top, black 70%, transparent 100%);
     }
 }
 
