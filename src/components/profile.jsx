@@ -27,17 +27,19 @@ function Profile() {
   }
   const history = useHistory();
   function handleClick() { history.push('/characters') }
+  const imageUrl = 'https://images.unsplash.com/photo-1529472119196-cb724127a98e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=321&q=80'
 
   const {name, species, status, image } = character;
-  console.log(character.origin)
+  console.log(image)
   return (
     <React.Fragment>
-      <CharacterDetails>
+      <CharacterDetails >
         <div className="profile-container">
           <div className="text-wrapper">
             <BackButton onChange={handleClick} />
             <div className="text-content">
               <h1>{name}</h1>
+              <hr/>
               <h4>Species</h4><p>{species}</p>
               <h4>Status</h4>
               <span className="profile-status">{status}</span>
@@ -48,8 +50,7 @@ function Profile() {
               </span>
             </div>
           </div>
-          <div className="img-wrapper">
-            <img src={image} alt="character_image"/>
+          <div className="img-wrapper" style={{ backgroundImage: `url(${image})` }}>
           </div>
         </div>
       </CharacterDetails>

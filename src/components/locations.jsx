@@ -21,11 +21,11 @@ function Locations({isFetching, locationIdList, loadLocationData, setFetching}) 
   async function fetchLocations() {
     try {
       const data = async () => {
-        const promises = [];
+        const locationPromises = [];
         const ids = [...Array(locationIdList).keys()];
-        promises.push(getLocations(ids));
+        locationPromises.push(getLocations(ids));
 
-        return Promise.all(promises);
+        return Promise.all(locationPromises);
      }
       // RETURN LIST OF RESIDENTS (DATA) PER LOCATION
       //const proxyUrl = "https://cors-anywhere.herokuapp.com/"

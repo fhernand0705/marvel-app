@@ -405,11 +405,19 @@ input:checked + .slider .desc
     }
 }
 
-// PROFILE SECTION
+
+ // PROFILE SECTION
+ 
 .profile-container {
   display: flex;
   flex-direction: row;
+  height: 100vh;
   background: rgba(0,0,0,.05);
+
+  @media (min-width: 20em) and (max-width: 750px) {
+    flex-direction: column;
+    height: 175vh;
+  }
 }
 
 .text-wrapper {
@@ -428,25 +436,33 @@ input:checked + .slider .desc
 .btn:hover {background-color: darkorange;}
 
 .text-content {
-  background-color: purple;
   padding: 2em;
   width: max-content;
   border-radius: 2em;
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,.6);
+  text-align: center;
     h1 { margin: 0 0 .5em; } 
+    hr { 
+      margin: 1.5em auto; 
+      width: 50%;
+    }
     p, .profile-status { 
       margin: .5em .5em; 
-      color: whitesmoke;
+      color: darkslateblue;
     }
+   @media (min-width: 20em) and (max-width: 750px) {
+     margin: 5em; 
+   } 
 }
 
 .img-wrapper {
   flex: .5;
-  mask-image: linear-gradient(to right, black 65%, transparent 80%);
-    img {
-      width: 32.1em; 
-      height: auto;
-      mask-image: linear-gradient(to right, transparent 5%, black 35%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  mask-image: linear-gradient(to left, black 85%, transparent 95%);
+    @media (min-width: 20em) and (max-width: 750px) {
+      text-align: center; 
+      mask-image: linear-gradient(to top, black 65%, transparent 95%);
     }
 }
 
