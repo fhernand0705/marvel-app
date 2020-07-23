@@ -15,8 +15,9 @@ code {
 
 h1, h4 {
   font-family: 'get schwifty', sans-serif;
-  color: orange;
-  //text-shadow: 2px 2px purple
+  background: linear-gradient(90deg, rgb(245, 161, 4),rgb(173, 3, 173));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
 }
 
 // NAVBAR
@@ -48,8 +49,9 @@ h1, h4 {
 .app-title h4 {
   font-family: 'get schwifty', sans-serif;
   font-size: 2em;
-  color: purple;
-  text-shadow: 1px 1px orange;
+  background: linear-gradient(45deg, purple 10%, orange 35%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin: .5em 0;
 }
 
@@ -297,7 +299,10 @@ input:checked + .slider .desc
 .card-text { 
   padding: 1em 2em 1em; 
     a { text-decoration: none; }
-    h4 { color: purple; }
+    .char-name { 
+      font-family: 'get schwifty', sans-serif;
+      color: purple; 
+    }
 }
 .status-alive { color: green; }
 .status-dead { color: red; }
@@ -361,8 +366,7 @@ input:checked + .slider .desc
   border-top-left-radius: 8em;
   transition: all .3s ease-in-out;
     a { text-decoration: none; }
-    h5 {
-      color: orange;
+    h4 {
       padding: 1em 0;
       text-align: center;
     }

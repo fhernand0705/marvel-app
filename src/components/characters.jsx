@@ -142,7 +142,7 @@ function Characters() {
                     <img src={char.image} className="char-img" alt="character_image"/>
                     <div className="card-text">
                       <NavLink to={`/character/${char.id}`}>
-                        <h4>{char.name}</h4>
+                        <h3 className="char-name">{char.name}</h3>
                       </NavLink>
                       <div>
                         <span>{char.species}</span>

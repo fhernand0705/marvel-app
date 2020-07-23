@@ -16,7 +16,7 @@ function LocationDetails({locations}) {
                 <div className="location-card-content"  key={res.data.id}>
                   <img src={res.data.image} alt="Resident_Image"/>
                   <NavLink to={`/character/${res.data.id}`}>
-                    <h5>{res.data.name}</h5>
+                    <h4>{res.data.name}</h4>
                   </NavLink>
                 </div>
             )}

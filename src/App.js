@@ -10,7 +10,7 @@ function App() {
     <React.Fragment>
       <Navbar />
       <Switch>
-        <Route path='/characters' render={() => <Characters />} />
+        <Route path='/characters' exact render={() => <Characters />} />
         <Route path='/character/:id' render={() => <Profile />} />
         <Route path='/locations' render={() => <Locations />} />
       </Switch>
