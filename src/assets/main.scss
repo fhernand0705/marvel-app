@@ -175,6 +175,7 @@ h1, h4 {
 
 .slider {
   position: absolute;
+  height: unset;
   cursor: pointer;
   top: 0;
   left: 0;
@@ -190,7 +191,7 @@ h1, h4 {
   content: "";
   height: 26px;
   width: 26px;
-  left: 6px;
+  left: 1px;
   bottom: 4px;
   background-color: white;
   -webkit-transition: .4s;
@@ -359,7 +360,7 @@ input:checked + .slider .desc
   background-color: purple;
   width: min-content;
   margin: 2em 2em;
-  height: 20em;
+  height: 22em;
   border-bottom-right-radius: 3em;
   border-bottom-left-radius: 3em;
   border-top-right-radius: 8em;

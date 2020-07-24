@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../assets/main.scss'
 
-function Switch({onChange}) {
+function Switch({ onChange }) {
     return (
         <div className="sort-wrapper">
             <p className="sort-header">Sort By</p>

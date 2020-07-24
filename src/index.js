@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'materialize-css/dist/css/materialize.min.css';
 import './assets/main.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';

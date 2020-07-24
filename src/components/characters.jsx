@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+
+import { BsFillPersonFill } from 'react-icons/bs';
+import { filterByName, filterBySpecies } from '../utils/filter-methods';
+import { sortAlpha } from '../utils/sort';
+
 import CharacterDetails from './character-details';
 import LoadMoreDataButton from './common/load-more-data-button';
 import Search from './common/search';
 import CheckboxWrapper from './common/checkbox-wrapper';
 import Switch from './common/switch';
-import withLoadData from './hoc/withLoadData';
-import {BsFillPersonFill} from 'react-icons/bs';
-import { filterByName, filterBySpecies } from '../utils/filter-methods';
-import { sortAlpha } from '../utils/sort';
-import axios from 'axios';
+import BackToTopBtn from './common/back-to-top-button';
 
 
 function Characters() { 
@@ -92,8 +94,12 @@ function Characters() {
     const chars = [...characters];
 
     setCheckItems(checkedItems => checkedItems.set(checkboxName, isChecked));
+    const filteredChars = filterBySpecies(checkboxName, chars);
 
-    return (isChecked && characters.length) ? setCharacters(filterBySpecies(checkboxName, chars)) : setCharacters(chars);
+    console.log(chars)
+    console.log(isChecked)
+    console.log(checkboxName)
+    return isChecked ? setCharacters(filteredChars) : setCharacters(chars => [...chars]);
   }
 
   function handleSort() {
@@ -109,11 +115,13 @@ function Characters() {
   }
 
   function getFilteredCharacters() {
-    return filterByName(searchQuery, characters);
+    const chars = [...characters];
+    return filterByName(searchQuery, chars);
   }
 
   const charsLength = characters.length;
-  console.log(characters)
+  //console.log(checkedItems)
+  //console.log(characters)
 
   return (
     <div>
@@ -169,6 +177,7 @@ function Characters() {
               }
           </div>
           </CharacterDetails>
+          <BackToTopBtn />
         </div>
         <div className="not-found-msg">
           {!charsLength && <div>No Characters Found...</div>}
@@ -177,4 +186,4 @@ function Characters() {
   )
 }
 
-export default withLoadData(Characters);
+export default Characters;

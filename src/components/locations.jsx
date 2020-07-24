@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LocationDetails from './location-details';
 import LoadMoreDataButton from './common/load-more-data-button';
-import withLoadData from './hoc/withLoadData';
 import { getLocations } from '../services/api-service';
 import loading_img from '../assets/images/loading-img.gif';
 
-function Locations({isFetching, locationIdList, loadLocationData, setFetching}) {
+function Locations() {
   const [locations, setLocations] = useState([]);
+  const [idList, setidList] = useState(3);
+  const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(false); 
 
   useEffect(() => {
@@ -16,13 +17,13 @@ function Locations({isFetching, locationIdList, loadLocationData, setFetching}) 
 
     if (!isFetching) return;
     fetchMoreLocations();
-  },[isFetching])
+  },[]);
 
   async function fetchLocations() {
     try {
       const data = async () => {
         const locationPromises = [];
-        const ids = [...Array(locationIdList).keys()];
+        const ids = [...Array(idList).keys()];
         locationPromises.push(getLocations(ids));
 
         return Promise.all(locationPromises);
@@ -44,7 +45,6 @@ function Locations({isFetching, locationIdList, loadLocationData, setFetching}) 
       const residentByLocation = residents.map(char => char);
 
       locations.map((place,i) => place.residents = residentByLocation[i])
-      console.log(locations)
       
       setLocations([...locations]);
       setIsLoading(false);
@@ -53,10 +53,14 @@ function Locations({isFetching, locationIdList, loadLocationData, setFetching}) 
    }
   }
   function fetchMoreLocations() {
-    if (locationIdList > 94) return;
+    if (idList > 94) return;
       fetchLocations();
-      setFetching(false);
+      setIsFetching(false);
   }
+  function handleLoadLocations() {
+    setidList((idList) => idList + 2);
+    setIsFetching(true);
+}
 
   return (
     <React.Fragment>
@@ -67,9 +71,9 @@ function Locations({isFetching, locationIdList, loadLocationData, setFetching}) 
       }
       <LocationDetails locations={locations}/>
       {isFetching && <div>Fetching more locations...</div>}
-      {!isLoading && <LoadMoreDataButton onClick={loadLocationData} />}
+      {!isLoading && <LoadMoreDataButton onClick={handleLoadLocations} />}
     </React.Fragment>
   )
 }
 
-export default withLoadData(Locations);
+export default Locations;

@@ -8,5 +8,5 @@ export function filterByName(searchQuery, characters) {
 }
 
 export function filterBySpecies(checkboxName, chars) {
-  return chars.filter(char => char.species.toLowerCase() === checkboxName);
+  return chars.filter(char => char.species.toLowerCase() === checkboxName); 
 }
