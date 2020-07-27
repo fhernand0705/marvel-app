@@ -11,7 +11,7 @@ import LoadMoreDataButton from './common/load-more-data-button';
 import Search from './common/search';
 import CheckboxWrapper from './common/checkbox-wrapper';
 import Switch from './common/switch';
-import BackToTopBtn from './common/back-to-top-button';
+import BackToTopBtn from './back-to-top-button';
 
 
 function Characters() { 
