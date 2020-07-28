@@ -14,10 +14,10 @@ function CheckboxWrapper({onChange, checkedItems, onClick, isHidden}) {
   return (
     <React.Fragment>
       <div className="dropdown-filter-wrapper">
-        <p onClick={onClick} className="dropdown-filter-link">
+        <label onClick={onClick} className="dropdown-filter-link purple-text text-darken-3">
           Filter By 
           <span><GoTriangleDown/></span>
-        </p> 
+        </label> 
         {!isHidden && 
           <div className={slideDown()}>
             <div className="category-title"><span>Species</span></div>
@@ -25,7 +25,6 @@ function CheckboxWrapper({onChange, checkedItems, onClick, isHidden}) {
               { checkboxes.map(item =>
                   <div className="dropdown-filter-item">
                     <label key={item.name} className="label-wrapper">
-                      {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
                       <Checkbox
                         name={item.name}
                         checked={checkedItems.get(item.name)}

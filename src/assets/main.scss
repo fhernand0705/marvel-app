@@ -81,12 +81,16 @@ h1, h4 {
 }
 
 .search-box {
-  position: relative;
-  width: 40%;
-  top: 14em;
-  @media (min-width: 20em) and (max-width: 640px) {
-    width: 70%;
-  }
+  top: 13em; 
+  height: 50px;
+}
+
+.search-label {
+  font-size: 1.35em !important;
+}
+
+.search-input {
+  border-bottom: 1px solid whitesmoke !important;
 }
 
 // FILTER/SORT SECTION
@@ -108,14 +112,14 @@ h1, h4 {
   background-color: #fff;
   box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
   margin: 1.5em 2em;
-  width: 20em;  
+  width: max-content;  
 
     @media (min-width: 1200px) {
       flex-direction: column;
       position: absolute;
       border-radius: 1em;
       padding: 2em; 
-      width: 11em;
+      //width: max-content;
     }
 }
 
@@ -123,12 +127,13 @@ h1, h4 {
 .dropdown-filter-wrapper { 
   position: relative;
   flex: 1;
-  margin: 1em .5em;
   top: -1em;
 }
 .dropdown-filter-link { 
   cursor: pointer; 
+  font-weight: 600;
   width: fit-content;
+  font-size: 1em !important;
     span { margin: 0 .25em; }
 }
 .dropdown-filter-content {
@@ -154,6 +159,7 @@ h1, h4 {
 }
 .checkbox { margin: .25em .25em; }
 
+
 // SORT (SWITCH INPUT) SECTION 
 .sort-wrapper {
   flex: .5;
@@ -163,8 +169,16 @@ h1, h4 {
 .switch {
   position: relative;
   display: inline-block;
-  width: 6em;
+  width: max-content;
   height: 34px;
+    label {
+      font-weight: 600;
+      font-size: 1em !important;
+    }
+}
+
+.lever:after {
+  background-color: purple !important;
 }
 
 .switch input {
