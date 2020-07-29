@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import _ from 'lodash';
 
 import { BsFillPersonFill } from 'react-icons/bs';
 import { filterByName, filterBySpecies } from '../utils/filter-methods';
@@ -19,7 +20,7 @@ function Characters() {
   const [page, setPage] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [checkedItems, setCheckItems] = useState(new Map());
-  const [isAscending, setIsAscending] = useState(false);
+  const [isAscending, setIsAscending] = useState(true);
   const [error, setError] = useState('');
   const [isHidden, setIsHidden] = useState(true); 
   
@@ -39,8 +40,10 @@ function Characters() {
   async function fetchCharacters() {
     const data = await axios.get(defaultEndpoint);
     const { info, results: characters = [] } = data.data;
+
+    const sortedCharacters = _.sortBy(characters, 'name'); 
     
-    setCharacters(characters);
+    setCharacters(sortedCharacters);
     setPage({...page, ...info, currentPage: defaultEndpoint});
   }
 
@@ -120,8 +123,6 @@ function Characters() {
   }
 
   const charsLength = characters.length;
-  //console.log(checkedItems)
-  //console.log(characters)
 
   return (
     <div>

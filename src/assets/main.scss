@@ -65,7 +65,10 @@ h1, h4 {
     }
 }
 
-.nav-item-link:hover { color: whitesmoke; }
+.nav-item-link:hover { 
+  color: whitesmoke; 
+  background-color: unset !important;
+}
 
 .dropdown, .col {display: none;}
 
@@ -158,7 +161,6 @@ h1, h4 {
   grid-template-columns: 5em .5em;
 }
 .checkbox { margin: .25em .25em; }
-
 
 // SORT (SWITCH INPUT) SECTION 
 .sort-wrapper {
