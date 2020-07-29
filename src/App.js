@@ -19,11 +19,3 @@ function App() {
 }
 
 export default App;
-
-{/* <input
-      type="text"
-      className="form-control search-box"
-      value={searchQuery}
-      onChange={(e) => onChange(e)}
-      placeholder="Search..."
-      ></input> */}
