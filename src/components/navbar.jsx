@@ -12,7 +12,7 @@ function Navbar() {
           <li className="app-logo"><img src={app_logo} alt="App Logo"/></li>
           <li className="app-title"><h4>Rick and Morty</h4></li>
           <li className="nav-item">
-            <NavLink to='/characters' className="nav-item-link">
+            <NavLink to='/' className="nav-item-link">
               Characters
             </NavLink>
           </li>
@@ -25,7 +25,7 @@ function Navbar() {
           <li className="dropdown-wrapper">
             <NavDropdown title="Get Schwifty" id="nav-dropdown">
               <NavDropdown.Item eventKey="4.1">
-                <NavLink to='/characters' className="dropdown-item">Characters</NavLink>
+                <NavLink to='/' className="dropdown-item">Characters</NavLink>
               </NavDropdown.Item>
               <NavDropdown.Item eventKey="4.2">
                 <NavLink to='/locations' className="dropdown-item">Locations</NavLink>
