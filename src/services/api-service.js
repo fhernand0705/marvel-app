@@ -4,11 +4,6 @@ import axios from 'axios';
 
 export const rickMortyEndpoint = 'https://rickandmortyapi.com/api/';
 
-// export async function getCharacters() {
-//   const data = await axios.get(rickMortyEndpoint);
-//   return data; 
-// }
-
 export function getCharacter(id) {
   return axios.get(`${rickMortyEndpoint}character/${id}`);
 }

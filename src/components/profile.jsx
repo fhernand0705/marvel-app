@@ -26,8 +26,7 @@ function Profile() {
     }
   }
   const history = useHistory();
-  function handleClick() { history.push('/characters') }
-  const imageUrl = 'https://images.unsplash.com/photo-1529472119196-cb724127a98e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=321&q=80'
+  function handleClick() { history.push('/') }
 
   const {name, species, status, image } = character;
   console.log(image)

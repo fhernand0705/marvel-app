@@ -24,8 +24,6 @@ function BackToTopBtn() {
         }
     }
 
-    console.log(document.documentElement.scrollTop, document.body.scrollTop)
-
     return (
         <React.Fragment>
             {showScrollBtn && <ArrowUpButton scrollToTop={handleScroll}/>}

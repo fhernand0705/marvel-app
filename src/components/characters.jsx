@@ -126,9 +126,10 @@ function Characters() {
 
   return (
     <div>
-      {error && <h4>{error}</h4>}
       <Search searchQuery={searchQuery} onChange={handleSearch} />
+      
       <div className="character-wrapper">
+        {error && <h4>{error}</h4>}
 
         <div className="menu-container">
           <div className="filter-sort-wrapper">
@@ -173,7 +174,8 @@ function Characters() {
                 </div>
             )}
             </div>
-              {charsLength > 0 &&
+              {
+                charsLength > 0 &&
                 <LoadMoreDataButton onClick={handleLoadMore}/> 
               }
           </div>
